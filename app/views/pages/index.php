@@ -14,7 +14,14 @@
                     <div class="row mx-auto search-bar">
                         <div class="col-12 col-sm-3 mt-3">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="daterangepicker" name="daterangepicker" value="<?= $_POST['daterangepicker'] ?? null?>">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" id="daterangepicker" name="daterangepicker" value="<?= $_POST['daterangepicker'] ?? null?>">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-3 mt-3">
