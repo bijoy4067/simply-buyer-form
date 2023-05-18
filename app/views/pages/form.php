@@ -133,8 +133,9 @@
             $('.plus-btn').click(function() {
                 var inputGroup = $(this).closest('.input-group');
                 var clonedInput = inputGroup.clone();
+                clonedInput.removeClass('is-valid');
                 clonedInput.find('input').val('');
-                clonedInput.find('.plus-btn').removeClass('is-valid').removeClass('plus-btn').addClass('minus-btn').html('<i class="fas fa-minus"></i>');
+                clonedInput.find('.plus-btn').removeClass('plus-btn').removeClass('is-valid').addClass('minus-btn').html('<i class="fas fa-minus"></i>');
                 $('#items-container').append(clonedInput);
             });
 
@@ -237,16 +238,6 @@
                     $(this).siblings('.invalid-feedback').remove();
                 }
             });
-
-            /*$('#note').blur(function(e) {
-                if ($(this).val().length > 0) {
-                    $(this).removeClass('is-invalid');
-                    $(this).addClass('is-valid');
-                    $(this).siblings('.invalid-feedback').remove();
-                } else {
-                    $(this).addClass('is-invalid');
-                }
-            });*/
         });
     </script>
 </body>
