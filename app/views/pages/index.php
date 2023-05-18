@@ -14,15 +14,15 @@
                     <div class="row mx-auto search-bar">
                         <div class="col-12 col-sm-3 mt-3">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="daterangepicker" name="daterangepicker">
+                                <input class="form-control" type="text" id="daterangepicker" name="daterangepicker" value="<?= $_POST['daterangepicker'] ?? null?>">
                             </div>
                         </div>
                         <div class="col-12 col-sm-3 mt-3">
                             <div class="form-group">
                                 <select class="form-control" name="user">
-                                    <option value="">Select User</option>
+                                    <option value="sleect">Select User</option>
                                     <?php foreach ($data['users'] as $value): ?>
-                                        <option value="<?= $value->entry_by?>"><?= $value->entry_by?></option>
+                                        <option value="<?= $value->entry_by?>" <?php if(isset($_POST['user']) && $_POST['user'] == $value->entry_by) echo 'selected'; ?>><?= $value->entry_by?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -30,7 +30,7 @@
                         <div class="col-12 col-sm-6">
                             <button class="btn btn-primary btn-sm submit_button mt-3 mb-3 mb-sm-0"><i class="fa fa-magnify"></i>  search</button>
 
-                            <a class="btn btn-info btn-sm mt-3 py-2 submit_button float-right" href="<?= BASEURL?>?page=form/create">
+                            <a class="btn btn-info btn-sm mt-3 py-2 submit_button float-right" href="<?= BASEURL?>?url=form/create">
                                 <i class="fa fa-plus"></i>
                                 Add
                             </a>
@@ -173,24 +173,25 @@
             });
 
             $('#daterangepicker').daterangepicker({
-                autoClose: false,
                 locale: {
-                    format: 'YYYY-MM-DD'
+                    format: 'YYYY-MM-DD',
+                    cancelLabel: 'Clear',
                 },
+                autoUpdateInput: false,
                 separator: ' to ',
                 language: 'en',
-                autoClose: false,
-                autoApply: false,
+                //autoClose: false,
+                
+                showCustomRangeLabel: false
             });
 
-            /*$('#daterangepicker').on('apply.daterangepicker', function(ev, picker) {
-                if (picker.startDate === null && picker.endDate === null) {
-                    $(this).val('');
-                }
-            });*/
+            $('#daterangepicker').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+            });
 
             $('.table').DataTable();
         })
+
     </script>
 </body>
 </html>

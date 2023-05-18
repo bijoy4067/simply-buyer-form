@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="container">
-        <form method="post" action="" id="submit_form">
+        <form method="post" class="p-3" action="" id="submit_form">
+            <h2>Buyer Form</h2>
             <div class="row">
                 <div class="col-12 col-sm-4">
                     <div class="form-group">
@@ -84,7 +85,7 @@
             <div class="row">
                 <div class="col-12 col-sm-3">
                     <div class="form-group">
-                        <button class="btn btn-warning">Submit</button>
+                        <button class="btn btn-warning" <?php if ($_COOKIE['submit_form']) echo 'data-toggle="tooltip" data-placement="top" title="You Can Submit twice within 24 Hours" disabled'?>>Submit</button>
                         <a href="<?= BASEURL?>?url=form/index" class="btn btn-primary">Back</a>
                     </div>
                 </div>
@@ -96,6 +97,8 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+
             $('#submit_form').submit(function(e) {
                 e.preventDefault();
                 $.ajax({
@@ -131,8 +134,13 @@
                 var inputGroup = $(this).closest('.input-group');
                 var clonedInput = inputGroup.clone();
                 clonedInput.find('input').val('');
-                clonedInput.find('.plus-btn').removeClass('plus-btn').addClass('minus-btn').html('<i class="fas fa-minus"></i>');
+                clonedInput.find('.plus-btn').removeClass('is-valid').removeClass('plus-btn').addClass('minus-btn').html('<i class="fas fa-minus"></i>');
                 $('#items-container').append(clonedInput);
+            });
+
+            $('#note').richText({
+                height: 0,
+                heightPercentage: 0,
             });
 
             $(document).on('click', '.minus-btn', function() {

@@ -40,11 +40,13 @@
                 $data['hash_key'] = hash('sha512', $data['receipt_id'] . $helper->rand_str(8));
                 $data['entry_at'] = date('Y-m-d');
                 if ($this->buyer->store($data)) {
+
+                    setcookie('submit_form', true, time() + (24 * 60 * 60));
+
                     $helper->response(200, [
                         'type' => 'success'
                     ]);
                 }
-                $this->buyer->store($data);
             }
         }
 

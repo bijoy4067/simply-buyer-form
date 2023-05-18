@@ -6,3 +6,4 @@
 <script src="<?= URLROOT ?>/js/daterangepicker.js"></script>
 <script src="<?= URLROOT ?>/js/jquery.dataTables.min.js"></script>
 <script src="<?= URLROOT ?>/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= URLROOT ?>/text-editor/src/jquery.richtext.min.js"></script>

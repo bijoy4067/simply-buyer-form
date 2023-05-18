@@ -62,7 +62,7 @@ class Buyer
             $end_date = $datepicker[1];
         }
 
-        if (!is_null($user_id)) {
+        if (!is_null($user_id) && is_numeric($user_id)) {
             $userID = (int) $user_id;
         }
 
@@ -77,9 +77,13 @@ class Buyer
         }
 
         if (isset($userID)) {
-            $query .= ' And entry_by = '.$userID;
+            if (isset($start_date) || isset($end_date)) {
+                $query .= ' AND entry_by = '.$userID;
+            } else {
+                $query .= ' WHERE entry_by = '.$userID;
+            }
         }
-        
+
         $this->db->query($query);
         $data['data'] = $this->db->resultSet();
         
